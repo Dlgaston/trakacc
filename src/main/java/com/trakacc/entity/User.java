@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,14 +37,17 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private List<Clearance> clearances;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "nwdtp_id", referencedColumnName = "id")
+	private Nwdtp nwdtp;
 
 	public User() {
 
 	}
 
-
+	
 	public User(Long id, String email, String password, String fName, String lName, LocalDateTime seniority,
-			List<Commission> commissions, List<Clearance> clearances) {
+			List<Commission> commissions, List<Clearance> clearances, Nwdtp nwdtp) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -53,6 +57,7 @@ public class User {
 		this.seniority = seniority;
 		this.commissions = commissions;
 		this.clearances = clearances;
+		this.nwdtp = nwdtp;
 	}
 
 
@@ -104,25 +109,30 @@ public class User {
 		this.seniority = seniority;
 	}
 
-
 	public List<Commission> getCommissions() {
 		return commissions;
 	}
-
 
 	public void setCommissions(List<Commission> commissions) {
 		this.commissions = commissions;
 	}
 
-
 	public List<Clearance> getClearances() {
 		return clearances;
 	}
-
 
 	public void setClearances(List<Clearance> clearances) {
 		this.clearances = clearances;
 	}
 
+
+	public Nwdtp getNwdtp() {
+		return nwdtp;
+	}
+
+
+	public void setNwdtp(Nwdtp nwdtp) {
+		this.nwdtp = nwdtp;
+	}
 
 }

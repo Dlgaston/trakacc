@@ -32,10 +32,11 @@ public class UserService {
 				account.setlName(user.getlName());
 				account.setPassword(user.getPassword());
 				account.setSeniority(user.getSeniority());
-				
+								
 				return userRepo.save(account);
 			} 
 				return null;
 		
 	}
+	
 }

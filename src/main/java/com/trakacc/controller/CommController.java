@@ -1,5 +1,7 @@
 package com.trakacc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trakacc.entity.Clearance;
 import com.trakacc.entity.Commission;
 import com.trakacc.repo.CommissionRepo;
 import com.trakacc.repo.UserRepo;
@@ -27,7 +30,7 @@ public class CommController {
 	@Autowired
 	CommissionService commService;
 	
-	@RequestMapping(value = "/create-commission", method = RequestMethod.GET)
+	@RequestMapping(value = "/add-commission", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Commission> createCommission(){
 		Commission comm = new Commission();
@@ -39,4 +42,29 @@ public class CommController {
 		Commission addComm = commService.newCommission(id, comm);
 		return new ResponseEntity<>(addComm, HttpStatus.OK);
 	}
+	@RequestMapping(value = "get-commissions/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<Commission>> getAllClearances(@PathVariable("id") Long id) {
+
+		return commService.getAllCommissions(id);
+
+	}
+	@RequestMapping(value = "delete-commission/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<String> deleteCommission(@PathVariable("id") Long id) {
+		String msg = "";
+		
+		try {
+			commRepo.deleteById(id);
+			msg = "Commission deleted";
+			return new ResponseEntity<>(msg, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			
+			msg = "Error in deleting Commission";
+			return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+		}
+
+	}
+	
 }

@@ -21,8 +21,6 @@ public class Commission {
 	private Long id;
 	@Column(name = "name")
 	private String name;
-	@Column(name = "has_commission")
-	private Boolean hasCommission;
 	@Column(name = "issue_date")
 	private LocalDate issueDate;
 	@Column(name = "expiration_date")
@@ -32,11 +30,10 @@ public class Commission {
 
 	}
 
-	public Commission(Long id, String name, Boolean hasCommission, LocalDate issueDate, LocalDate expirationDate) {
+	public Commission(Long id, String name, LocalDate issueDate, LocalDate expirationDate) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.hasCommission = hasCommission;
 		this.issueDate = issueDate;
 		this.expirationDate = expirationDate;
 	}
@@ -47,14 +44,6 @@ public class Commission {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Boolean getHasCommission() {
-		return hasCommission;
-	}
-
-	public void setHasCommission(Boolean hasCommission) {
-		this.hasCommission = hasCommission;
 	}
 
 	public Long getId() {

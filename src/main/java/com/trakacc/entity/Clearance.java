@@ -18,8 +18,6 @@ public class Clearance {
 	private Long id;
 	@Column(name = "name")
 	private String name;
-	@Column(name = "has_clearance")
-	private Boolean hasClearance;
 	@Column(name = "issue_date")
 	private LocalDate issueDate;
 	@Column(name = "expiration_date")
@@ -29,11 +27,10 @@ public class Clearance {
 
 	}
 
-	public Clearance(Long id, String name, Boolean hasClearance, LocalDate issueDate, LocalDate expirationDate) {
+	public Clearance(Long id, String name, LocalDate issueDate, LocalDate expirationDate) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.hasClearance = hasClearance;
 		this.issueDate = issueDate;
 		this.expirationDate = expirationDate;
 
@@ -47,13 +44,6 @@ public class Clearance {
 		this.name = name;
 	}
 
-	public Boolean getHasClearance() {
-		return hasClearance;
-	}
-
-	public void setHasClearance(Boolean hasClearance) {
-		this.hasClearance = hasClearance;
-	}
 
 	public Long getId() {
 		return id;
