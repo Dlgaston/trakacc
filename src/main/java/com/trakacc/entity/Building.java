@@ -2,17 +2,37 @@ package com.trakacc.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name = "building")
 public class Building {
-	Integer id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
+	@Column(name = "name")
 	String name;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	Address address;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "building_id")
 	List<FacilityPost> posts;
 
 	public Building() {
 
 	}
 
-	public Building(Integer id, String name, Address address, List<FacilityPost> posts) {
+	public Building(Long id, String name, Address address, List<FacilityPost> posts) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -22,11 +42,11 @@ public class Building {
 
 	
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

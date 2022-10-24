@@ -1,44 +1,68 @@
 package com.trakacc.entity;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "facility_post")
 public class FacilityPost {
-	Integer id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
+	@Column(name = "name")
 	String name;
+	@Column(name = "post_code")
 	String postCode;
-	LocalDateTime postDateTime;
+	@Column(name = "post_time")
+	LocalTime postTime;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	User officer;
-	Boolean nwdtp;
+	@Column(name = "is_nwdtp")
+	Boolean isNwdtp;
+	@Column(name="nwdtp_Hours")
 	Integer nwdtpHours;
+	@Column(name = "commission")
 	String commission;
+	@Column(name = "clearance")
 	String clearance;
 
 	public FacilityPost() {
 
 	}
 
-	 
-	public FacilityPost(Integer id, String name, String postCode, LocalDateTime postDateTime, User officer, Boolean nwdtp,
-			int nwdtpHours, String commission, String clearance) {
+
+	public FacilityPost(Long id, String name, String postCode, LocalTime postTime, User officer, Boolean isNwdtp,
+			Integer nwdtpHours, String commission, String clearance) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.postCode = postCode;
-		this.postDateTime = postDateTime;
+		this.postTime = postTime;
 		this.officer = officer;
-		this.nwdtp = nwdtp;
+		this.isNwdtp = isNwdtp;
 		this.nwdtpHours = nwdtpHours;
 		this.commission = commission;
 		this.clearance = clearance;
 	}
 
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -58,12 +82,14 @@ public class FacilityPost {
 		this.postCode = postCode;
 	}
 
-	public LocalDateTime getPostDateTime() {
-		return postDateTime;
+
+	public LocalTime getPostTime() {
+		return postTime;
 	}
 
-	public void setPostDateTime(LocalDateTime postDateTime) {
-		this.postDateTime = postDateTime;
+
+	public void setPostTime(LocalTime postTime) {
+		this.postTime = postTime;
 	}
 
 
@@ -71,21 +97,19 @@ public class FacilityPost {
 		return officer;
 	}
 
-
 	public void setOfficer(User officer) {
 		this.officer = officer;
 	}
 
-
-	public Boolean getNwdtp() {
-		return nwdtp;
+	public Boolean getIsNwdtp() {
+		return isNwdtp;
 	}
 
-	public void setNwdtp(Boolean nwdtp) {
-		this.nwdtp = nwdtp;
+	public void setIsNwdtp(Boolean isNwdtp) {
+		this.isNwdtp = isNwdtp;
 	}
 
-	public int getNwdtpHours() {
+	public Integer getNwdtpHours() {
 		return nwdtpHours;
 	}
 
